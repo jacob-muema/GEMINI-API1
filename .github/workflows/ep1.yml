@@ -60,5 +60,6 @@ jobs:
         run: |
           cd ./ep1
           echo -n "$GOOGLE_CREDENTIALS" > $GOOGLE_APPLICATION_CREDENTIALS
+          pip install gcloud
           python gcsUpoad.py
           rm $GOOGLE_APPLICATION_CREDENTIALS
