@@ -1,2 +1,3 @@
 # devops-youtube
-This will be for Git Actions for Youtube courses.
+This repo will contain the codes for [daslearning.in](https://daslearning.in/) videos
+Thanks for coming here.
