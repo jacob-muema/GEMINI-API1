@@ -10,5 +10,5 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: Hello From DasLearning.in
+- script: echo "Hello From DasLearning.in"
   displayName: 'Run a one-line script'
