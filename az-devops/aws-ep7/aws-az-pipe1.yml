@@ -32,6 +32,7 @@ stages:
 
   # CD Job
   - job: uploadJob
+    dependsOn: createStorage
     #### Steps inside the Job
     steps:
 
