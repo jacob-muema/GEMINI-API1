@@ -6,8 +6,6 @@ pool:
 
 stages:
 - stage: stage1
-  pool:
-    vmImage: 'windows-latest'
 
   ## Jobs inside Stage
   jobs:
