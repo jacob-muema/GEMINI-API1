@@ -26,7 +26,7 @@ stages:
     steps:
 
     - task: Bash@3
-      name: tf-plan
+      name: tfplan
       displayName: 'Terraform Plan'
       inputs:
         targetType: 'inline'
@@ -38,7 +38,7 @@ stages:
           terraform plan
 
     - task: Bash@3
-      name: tf-apply
+      name: tfapply
       displayName: 'Terraform Apply'
       condition: eq(variables['Build.SourceBranchName'], 'main')
       inputs:
