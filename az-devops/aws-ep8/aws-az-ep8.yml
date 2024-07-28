@@ -51,13 +51,13 @@ stages:
   # CD Job
   - job: uploadJob
     dependsOn: createStorage
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
     #### Steps inside the Job
     steps:
 
     - task: Bash@3
       name: uploadToS3
       displayName: 'Upload files to S3 bucket'
-      condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
       inputs:
         targetType: 'inline'
         script: |
