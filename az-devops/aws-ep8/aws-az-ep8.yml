@@ -13,7 +13,7 @@ pool:
 variables:
   isMain: true
 
-# Stages
+# Stages 
 stages:
 - stage: stage1
 
@@ -26,7 +26,7 @@ stages:
     steps:
 
     - task: Bash@3
-      name: tf-plan
+      name: tfplan
       displayName: 'Terraform Plan'
       inputs:
         targetType: 'inline'
@@ -38,7 +38,7 @@ stages:
           terraform plan
 
     - task: Bash@3
-      name: tf-apply
+      name: tfapply
       displayName: 'Terraform Apply'
       condition: eq(variables['Build.SourceBranchName'], 'main')
       inputs:
@@ -51,13 +51,13 @@ stages:
   # CD Job
   - job: uploadJob
     dependsOn: createStorage
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
     #### Steps inside the Job
     steps:
 
     - task: Bash@3
       name: uploadToS3
       displayName: 'Upload files to S3 bucket'
-      condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
       inputs:
         targetType: 'inline'
         script: |
