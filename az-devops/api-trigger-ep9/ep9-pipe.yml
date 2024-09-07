@@ -1,0 +1,25 @@
+trigger:
+- none
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: stage1
+
+  ## Jobs inside Stage
+  jobs:
+
+  ### CI Job
+  - job: createStorage
+    #### Steps inside the Job
+    steps:
+
+    - task: Bash@3
+      name: createS3
+      displayName: 'Create S3 bucket'
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo "Script Started"
+          echo "$(pipeVar)"
