@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="DasLearning | API Trigger for Azure DevOps Pipelines">
+
+    <title>DasLearning | API Trigger for Azure DevOps Pipelines</title>
+    <!-- The CSS links -->
+    <link rel='stylesheet' href='./assets/bootstrap.css'>
+  </head>
+
+  <body>
+    <div class="container border border-primary rounded mt-2 p-2">
+      <p class="text-muted">Please select enter / select details to deploy your bucket</p>
+      <label for="bucketName" class="form-label">Bucket Name</label>
+      <input type="text" class="form-control mb-1" id="bucketName" placeholder="bucket name">
+      <select class="form-select mb-1" aria-label="Default select example">
+        <option selected>Select Bucket Region</option>
+        <option value="1">Mumbai</option>
+        <option value="2">Singapore</option>
+        <option value="3">Tokyo</option>
+      </select>
+      <button id="loginSubmit" type="button" class="btn btn-primary">Submit</button>
+    </div>
+
+    <script src="./assets/bootstrap.js"></script>
+    <script src="./assets/main.js"></script>
+  </body>
+</html>
