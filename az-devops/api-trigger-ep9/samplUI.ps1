@@ -26,10 +26,10 @@ $jsonBody = @{
         }
     }
     variables = @{
-        pipeVar = @{
+        bucketName = @{
             value = $BucketName
         }
-        dropDown = @{
+        bucketRegion = @{
             value = $BucketRegion
         }
     }
