@@ -6,12 +6,13 @@
 
 # https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/runs/run-pipeline?view=azure-devops-rest-7.1
 
+$BucketName = "das-ep9ps1"
+$BucketRegion = "ap-southeast-1"
+
 $AzureDevOpsPAT = "<pat>"
 $OrganizationName = "daslearning"
 $ProjectName = "daslearningProject"
 $PipelineId = "10"
-
-$BucketName = "DasLearning"
 
 $AzureDevOpsAuthenicationHeader = @{Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$($AzureDevOpsPAT)")) }
 $UriOrga = "https://dev.azure.com/$OrganizationName/" 
@@ -27,6 +28,9 @@ $jsonBody = @{
     variables = @{
         pipeVar = @{
             value = $BucketName
+        }
+        dropDown = @{
+            value = $BucketRegion
         }
     }
 }
