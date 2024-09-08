@@ -12,7 +12,7 @@ $BucketRegion = "ap-southeast-1"
 $AzureDevOpsPAT = "<pat>"
 $OrganizationName = "daslearning"
 $ProjectName = "daslearningProject"
-$PipelineId = "10"
+$PipelineId = "11"
 
 $AzureDevOpsAuthenicationHeader = @{Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$($AzureDevOpsPAT)")) }
 $UriOrga = "https://dev.azure.com/$OrganizationName/" 
