@@ -1,9 +1,8 @@
 # Create a GCS bucket
 
 resource "google_storage_bucket" "buckets" {
-  for_each = { for bucket in var.bucket_list : bucket.name => bucket }
-  name     = each.key
+  name     = var.bucket.name
   project  = var.project
-  location = each.value.region
-  labels   = each.value.tags
+  location = var.bucket.region
+  labels   = var.bucket.tags
 }
