@@ -1,7 +1,8 @@
 # DasLearning Episode no. 13 on Terraform Dynamic Block
 
 resource "google_compute_network" "default" {
-  name = "test-network"
+  name    = "test-network"
+  project = var.project
 }
 
 # Only Allow & Ingress for this demo
