@@ -22,5 +22,5 @@ rules = {
   }
 }
 
-source_ranges = [ "33.20.34.23/24" ]
+source_ranges = [ "10.10.0.0/24" ]
 priority      = 2024
