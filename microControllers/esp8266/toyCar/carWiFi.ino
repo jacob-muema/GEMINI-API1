@@ -1,6 +1,7 @@
 /* 
   Controls a toy car using ESP8266
   Developer: Somnath Das
+  Contact: daslearning.in
 */
 
 #include <ESP8266WiFi.h>
@@ -9,16 +10,16 @@
 #include "LittleFS.h"
 
 // Define Motor PINs
-#define fwdPin 13   //D7
-#define bckPin 15   //D8
-#define leftPin 14  //D5
-#define rightPin 12 //D6
+#define fwdPin 13   //D7 connects to the forward pin of rear DC motor via motor driver
+#define bckPin 15   //D8 connects to the backward pin of rear DC motor via motor driver
+#define leftPin 14  //D5 connects to the left pin of front DC motor via motor driver
+#define rightPin 12 //D6 connects to the right pin of front DC motor via motor driver
 
 // Define LED PINs
-#define fLight 5  //D1
-#define bLight 4  //D2
-#define leftInd 0 //D3
-#define rigtInd 2 //D4
+#define fLight 5  //D1 connects to head lamp LEDs (use proper resistor)
+#define bLight 4  //D2 connects to rear brake RED LEDs (use proper resistor)
+#define leftInd 0 //D3 connects to left indicator LEDs (use proper resistor)
+#define rigtInd 2 //D4 connects to right indicator LEDs (use proper resistor
 
 // Replace with your network credentials
 const char* ssid = "CarMCU";
