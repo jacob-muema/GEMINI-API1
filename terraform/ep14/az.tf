@@ -1,7 +1,7 @@
 # Using Terraform Local Variables & Understanding nested for loop
 
 locals {
-  example_stg_acc = "${var.local_bkt_name}-local"
+  example_stg_acc = "${var.local_bkt_name}local"
 
   stg_container_mappings = distinct(flatten([
     for stg in var.storage_accounts : [
