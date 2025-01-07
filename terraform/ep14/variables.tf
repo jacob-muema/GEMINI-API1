@@ -4,6 +4,11 @@ variable "subscription_id" {
   description = "The Azure Subscription ID"
 }
 
+variable "rg_name" {
+  type        = string
+  description = "The Resource Group name"
+}
+
 variable "local_bkt_name" {
   type        = string
   description = "The name of the single bucket for local var example"

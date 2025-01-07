@@ -1,6 +1,7 @@
 # Values for the variables
 
 subscription_id = "" # Update with your ID
+rg_name         = "rg-dl-tf-ep14"
 local_bkt_name  = "dl-yt-ep14"
 
 storage_accounts = [
