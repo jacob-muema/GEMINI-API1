@@ -47,6 +47,6 @@ resource "azurerm_storage_container" "nested_looped_containers" {
   for_each = { for stg_cont in local.stg_container_mappings : "${stg_cont.stg_acc}-${stg_cont.container_name}" => stg_cont }
 
   name                  = each.value.container_name
-  storage_account_name  = azurerm_storage_account.looped_stg_accounts[each.value.stg_acc].name
+  storage_account_id    = azurerm_storage_account.looped_stg_accounts[each.value.stg_acc].id
   container_access_type = "private"
 }
