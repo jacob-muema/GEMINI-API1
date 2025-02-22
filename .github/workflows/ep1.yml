@@ -5,8 +5,8 @@ name: 'CICD EP1'
 on:
   push:
     branches:
-      - 'main'
-      - 'ep1'
+      - 'nomain'
+      - 'noep1'
     paths:
       - 'ep1/**'
 
