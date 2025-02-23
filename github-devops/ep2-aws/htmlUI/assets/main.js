@@ -1,9 +1,9 @@
 // The JS file to work with this API trigger for Azure DevOps Pipeline
 const pat = "<pat>";
 const gitOwner = "daslearning-org";
-const repoName = "daslearning";
+const repoName = "devops-youtube";
 
-const pipelineId = "test-wf.yml";
+const pipelineId = "gh-act-ep2.yml";
 
 function sendPOSTRequest(url, data) {
   const xhr = new XMLHttpRequest();
