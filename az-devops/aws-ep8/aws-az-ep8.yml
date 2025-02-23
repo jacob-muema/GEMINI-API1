@@ -6,6 +6,8 @@ trigger:
   paths:
     include:
     - az-devops/aws-ep8/*
+    exclude:
+    - az-devops/aws-ep8/README.md
 
 pool:
   vmImage: ubuntu-latest
