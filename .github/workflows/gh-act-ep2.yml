@@ -40,6 +40,7 @@ jobs:
           terraform init
           terraform plan
           terraform apply --auto-approve
+          deactivate
 
       - name: Website Files Upload
         id: 'html-upload'
@@ -56,3 +57,4 @@ jobs:
           export AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_TF_KEY }}"
           aws s3 sync ./htmlUI/ s3://"${{ inputs.bucket }}"
           aws s3 cp ./tf/terraform.tfstate "s3://daslearning-tf/$GITHUB_RUN_ID/terraform.tfstate"
+          deactivate
