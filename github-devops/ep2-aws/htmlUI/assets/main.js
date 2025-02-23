@@ -44,7 +44,7 @@ function apiCall() {
 
   if(bucketName.length >= 1){
     const jsonBody = {
-      ref: "develop", // your branch
+      ref: "main", // your branch
       inputs: {
         bucket: bucketName,
         region: region
