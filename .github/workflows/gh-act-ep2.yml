@@ -40,7 +40,6 @@ jobs:
           terraform init
           terraform plan
           terraform apply --auto-approve
-          deactivate
 
       - name: Website Files Upload
         id: 'html-upload'
