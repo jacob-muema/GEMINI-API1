@@ -25,11 +25,11 @@ jobs:
         id: 'ci-compile'
         run: |
           cd ./github-devops/ep2-aws/cvHtml
-          sudo apt update -y
-          sudo apt install apache2 -y
+          sudo apt-get update -y
+          sudo apt-get install apache2 -y
           sudo systemctl start apache2
           sudo mv /var/www/html/index.html /var/www/html/index.html.bak
-          sudo cp . /var/www/html/
+          sudo cp -r . /var/www/html/
           sudo systemctl restart apache2
           echo ".....Apache2 installed and custom HTML deployed....."
           curl localhost
