@@ -32,7 +32,6 @@ jobs:
           sudo cp -r . /var/www/html/
           sudo systemctl restart apache2
           echo ".....Apache2 installed and custom HTML deployed....."
-          curl localhost
 
       - name: CI - Test App & Environment
         id: 'ci-test-app'
