@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Generator</title>
+    <style>
+        /* Base styles */
+        :root {
+            --color-purple-400: #a78bfa;
+            --color-purple-500: #8b5cf6;
+            --color-purple-600: #7c3aed;
+            --color-gray-300: #d1d5db;
+            --color-gray-500: #6b7280;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+            --color-gray-950: #0c1120;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            background: linear-gradient(to bottom right, var(--color-gray-900), var(--color-gray-950));
+        }
+        
+        /* Header */
+        header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-gray-800);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .sparkle-icon {
+            color: var(--color-purple-400);
+        }
+        
+        /* Main content */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            max-width: 64rem;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        /* Response area */
+        .response-area {
+            flex: 1;
+            margin-bottom: 1.5rem;
+            overflow: auto;
+        }
+        
+        .response-card {
+            background-color: rgba(31, 41, 55, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid var(--color-gray-700);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        
+        .response-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .ai-avatar {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 9999px;
+            background-color: var(--color-purple-600);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .response-content {
+            padding-left: 2.5rem;
+            color: var(--color-gray-300);
+            line-height: 1.5;
+        }
+        
+        .empty-state {
+            height: 16rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-gray-500);
+            text-align: center;
+        }
+        
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: rgba(124, 58, 237, 0.5);
+        }
+        
+        /* Form */
+        .input-form {
+            position: relative;
+        }
+        
+        .input-container {
+            position: relative;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid var(--color-gray-700);
+            background-color: rgba(31, 41, 55, 0.3);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s;
+        }
+        
+        .input-container:focus-within {
+            box-shadow: 0 0 0 2px var(--color-purple-500);
+            border-color: transparent;
+        }
+        
+        textarea {
+            width: 100%;
+            background-color: transparent;
+            padding: 1rem;
+            padding-right: 3rem;
+            outline: none;
+            resize: none;
+            min-height: 100px;
+            color: var(--color-gray-300);
+            border: none;
+        }
+        
+        textarea::placeholder {
+            color: var(--color-gray-500);
+        }
+        
+        .submit-button {
+            position: absolute;
+            bottom: 0.75rem;
+            right: 0.75rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background-color: var(--color-purple-600);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .submit-button:hover:not(:disabled) {
+            background-color: var(--color-purple-500);
+        }
+        
+        .submit-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .generating-status {
+            position: absolute;
+            bottom: -2rem;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--color-purple-400);
+            animation: pulse 2s infinite;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-gray-800);
+            padding: 1rem;
+            text-align: center;
+            color: var(--color-gray-500);
+            font-size: 0.875rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            border: 2px solid white;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (min-width: 768px) {
+            main {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <span class="sparkle-icon">✨</span>
+            <h1>AI Text Generator</h1>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        <!-- Response area -->
+        <div class="response-area">
+            {% if response_text %}
+            <div class="response-card">
+                <div class="response-header">
+                    <div class="ai-avatar">
+                        <span>✨</span>
+                    </div>
+                    <div style="font-weight: 500;">AI Assistant</div>
+                </div>
+                <div class="response-content">
+                    <p>{{ response_text }}</p>
+                </div>
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <div class="empty-state-icon">✨</div>
+                <p style="font-size: 1.125rem;">Enter a prompt to generate AI text</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Input form -->
+        <form method="POST" class="input-form">
+            <div class="input-container">
+                <textarea 
+                    id="user_input" 
+                    name="user_input" 
+                    placeholder="Enter your prompt..."
+                    rows="3"
+                    required
+                >{{ request.form.get('user_input', '') }}</textarea>
+                <button 
+                    type="submit" 
+                    class="submit-button"
+                    id="submit-button"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m22 2-7 20-4-9-9-4Z"></path>
+                        <path d="M22 2 11 13"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="generating-status" id="generating-status" style="display: none;">
+                Generating response...
+            </div>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Powered by Flask and AI technology</p>
+    </footer>
+
+    <script>
+        // Simple form interaction
+        const form = document.querySelector('form');
+        const submitButton = document.getElementById('submit-button');
+        const generatingStatus = document.getElementById('generating-status');
+        const textarea = document.querySelector('textarea');
+
+        form.addEventListener('submit', function(e) {
+            // Show generating status
+            submitButton.innerHTML = '<div class="spinner"></div>';
+            submitButton.disabled = true;
+            generatingStatus.style.display = 'block';
+        });
+
+        // Disable submit button if textarea is empty
+        textarea.addEventListener('input', function() {
+            submitButton.disabled = !this.value.trim();
+        });
+
+        // Initialize button state
+        submitButton.disabled = !textarea.value.trim();
+    </script>
+</body>
+</html>

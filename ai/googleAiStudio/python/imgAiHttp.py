@@ -3,7 +3,7 @@ import os
 import base64
 import google.generativeai as genai
 
-genai.configure(api_key="YOUR_API_KEY")
+genai.configure(api_key="")
 model = genai.GenerativeModel(model_name = "gemini-1.5-flash")
 image_path_1 = "https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1638882947/EducationHub/photos/tourists-at-victoria-falls.jpg"  # Replace with the actual path to your first image
 
