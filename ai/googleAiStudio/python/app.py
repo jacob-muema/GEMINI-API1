@@ -5,7 +5,7 @@ import google.generativeai as genai
 app = Flask(__name__)
 
 # Configure the Generative AI API
-genai.configure(api_key="")
+genai.configure(api_key="AIzaSyDtOuEoqPTP3WFrtjVKgfm9S3Af-XQbEmw")
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 @app.route("/", methods=["GET", "POST"])
